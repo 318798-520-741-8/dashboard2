@@ -55,7 +55,8 @@ day_list = [
     "Sunday",
 ]
 
-check_in_duration = df["Check-In Time"].describe(datetime_is_numeric=True)
+df["Check-In Time"] = pd.to_datetime(df["Check-In Time"], errors="coerce")
+check_in_duration = df["Check-In Time"].astype("int64").describe()
 
 # Register all departments for callbacks
 all_departments = df["Department"].unique().tolist()
